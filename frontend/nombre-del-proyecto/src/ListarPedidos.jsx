@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import './App.css'
+import './App.css'
 
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
   Button,
-  Dialog, 
-  DialogTitle, 
-  DialogContent, 
-  TextField, 
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
 } from '@mui/material';
 
 const ListaPedidos = () => {
@@ -22,7 +22,7 @@ const ListaPedidos = () => {
   const [pedidoEditando, setPedidoEditando] = useState(null);
   const [openEditarDialog, setOpenEditarDialog] = useState(false);
 
-   // Definir los estados para cada campo de edición
+  // Definir los estados para cada campo de edición
   const [nombreEditando, setNombreEditando] = useState('');
   const [precioEditando, setPrecioEditando] = useState('');
   const [cantidadEditando, setCantidadEditando] = useState('');
@@ -79,7 +79,7 @@ const ListaPedidos = () => {
       total: totalEditando
       // Agrega aquí los campos restantes si es necesario
     };
-  
+
     axios.put(`http://127.0.0.1:8000/producto/${pedidoEditando.id}`, datosEditados)
       .then(response => {
         console.log(`Pedido con ID ${pedidoEditando.id} editado correctamente`);
@@ -88,14 +88,14 @@ const ListaPedidos = () => {
       .catch(error => {
         console.log(error);
       });
-  
+
     setOpenEditarDialog(false);
   };
 
 
-// ----------------------------------------------------------
+  // ----------------------------------------------------------
 
-const handleNuevoPedido = () => {
+  const handleNuevoPedido = () => {
     setPedidoEditando(null); // Para indicar que no se está editando un pedido existente
     setNombreEditando('');
     setPrecioEditando('');
@@ -130,19 +130,19 @@ const handleNuevoPedido = () => {
   };
 
 
-// ----------------------------------------------------------
+  // ----------------------------------------------------------
   return (
     <div>
       <h1>Lista de Pedidos</h1>
-            <Button 
-        variant="contained" 
-        color="primary" 
+      <Button
+        variant="contained"
+        color="primary"
         onClick={() => handleNuevoPedido()}
-        >
+      >
         Agregar Pedido
-        </Button>
+      </Button>
       <TableContainer component={Paper}>
-        <Table>
+        <Table className="miTablaCSS">
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
@@ -151,7 +151,7 @@ const handleNuevoPedido = () => {
               <TableCell>Descripción</TableCell>
               <TableCell>Estado</TableCell>
               <TableCell>Total</TableCell>
-              <TableCell>Acciones</TableCell>
+              <TableCell >Acciones</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -164,16 +164,16 @@ const handleNuevoPedido = () => {
                 <TableCell>{pedido.estado}</TableCell>
                 <TableCell>{pedido.total}</TableCell>
                 <TableCell>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
+                  <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => handleEditar(pedido)}
                   >
                     Editar
                   </Button>
-                  <Button 
-                    variant="contained" 
-                    color="error" 
+                  <Button
+                    variant="contained"
+                    color="error"
                     onClick={() => handleEliminar(pedido.id)}
                   >
                     Eliminar
@@ -184,7 +184,7 @@ const handleNuevoPedido = () => {
           </TableBody>
         </Table>
       </TableContainer>
-                {/* Diálogo para la edición */}
+      {/* Diálogo para la edición */}
       <Dialog open={openEditarDialog} onClose={() => setOpenEditarDialog(false)}>
         <DialogTitle>Editar Pedido</DialogTitle>
         <DialogContent>
@@ -192,44 +192,44 @@ const handleNuevoPedido = () => {
             <div>
               <div>
                 <TextField
-                    label="Nombre"
-                    value={pedidoEditando ? nombreEditando || pedidoEditando.nombre : ''}
-                    onChange={(e) => setNombreEditando(e.target.value)}
+                  label="Nombre"
+                  value={pedidoEditando ? nombreEditando || pedidoEditando.nombre : ''}
+                  onChange={(e) => setNombreEditando(e.target.value)}
                 />
               </div>
               <div>
                 <TextField
-                    label="Precio"
-                    value={pedidoEditando ? precioEditando || pedidoEditando.precio : ''}
-                    onChange={(e) => setPrecioEditando(e.target.value)}
+                  label="Precio"
+                  value={pedidoEditando ? precioEditando || pedidoEditando.precio : ''}
+                  onChange={(e) => setPrecioEditando(e.target.value)}
                 />
               </div>
               <div>
                 <TextField
-                    label="Cantidad"
-                    value={pedidoEditando ? cantidadEditando || pedidoEditando.cantidad : ''}
-                    onChange={(e) => setCantidadEditando(e.target.value)}
+                  label="Cantidad"
+                  value={pedidoEditando ? cantidadEditando || pedidoEditando.cantidad : ''}
+                  onChange={(e) => setCantidadEditando(e.target.value)}
                 />
               </div>
               <div>
                 <TextField
-                    label="Descripcion"
-                    value={pedidoEditando ? descripcionEditando || pedidoEditando.descripcion : ''}
-                    onChange={(e) => setDescripcionEditando(e.target.value)}
+                  label="Descripcion"
+                  value={pedidoEditando ? descripcionEditando || pedidoEditando.descripcion : ''}
+                  onChange={(e) => setDescripcionEditando(e.target.value)}
                 />
               </div>
               <div>
                 <TextField
-                    label="Estado"
-                    value={pedidoEditando ? estadoEditando || pedidoEditando.estado : ''}
-                    onChange={(e) => setEstadoEditando(e.target.value)}
+                  label="Estado"
+                  value={pedidoEditando ? estadoEditando || pedidoEditando.estado : ''}
+                  onChange={(e) => setEstadoEditando(e.target.value)}
                 />
               </div>
               <div>
                 <TextField
-                    label="Total"
-                    value={pedidoEditando ? totalEditando || pedidoEditando.total : ''}
-                    onChange={(e) => setTotalEditando(e.target.value)}
+                  label="Total"
+                  value={pedidoEditando ? totalEditando || pedidoEditando.total : ''}
+                  onChange={(e) => setTotalEditando(e.target.value)}
                 />
               </div>
               {/* Resto de los campos (precio, cantidad, descripción, estado, total) con TextField */}
@@ -238,7 +238,7 @@ const handleNuevoPedido = () => {
           )}
         </DialogContent>
       </Dialog>
-      
+
 
       {/* Diálogo para agregar un nuevo pedido */}
       <Dialog open={openEditarDialog} onClose={() => setOpenEditarDialog(false)}>

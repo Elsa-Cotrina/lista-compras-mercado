@@ -6,8 +6,14 @@
 }
 
 body{
-  background-color: cadetblue ;
+  background-color: rgb(139, 122, 179) ;
 }
+
+.miTablaCSS {
+  background-color: #f2f2f2;
+  border: 15px solid #534f4f;
+}
+
 
 @keyframes logo-spin {
   from {
